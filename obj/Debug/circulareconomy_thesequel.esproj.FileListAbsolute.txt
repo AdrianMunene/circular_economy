@@ -1,0 +1,2 @@
+C:\circulareconomy_thesequel\obj\Debug\circulareconomy_thesequel.esproj.SuggestedBindingRedirects.cache
+C:\circulareconomy_thesequel\obj\Debug\circulareconomy_thesequel.esproj.CoreCompileInputs.cache

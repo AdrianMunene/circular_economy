@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/0.5.74-alpha">
+  <PropertyGroup>
+    <StartupCommand>npm start</StartupCommand>
+    <!-- Command to run on project build -->
+    <BuildCommand>
+    </BuildCommand>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="models\" />
+    <Folder Include="config\" />
+    <Folder Include="controllers\" />
+    <Folder Include="public\javascripts\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="views\register.pug" />
+  </ItemGroup>
+</Project>

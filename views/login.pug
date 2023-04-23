@@ -1,0 +1,14 @@
+doctype html
+head
+  link(rel='stylesheet' href='/stylesheets/register.css')
+  title Login Form
+form#login-form(action='/login' method='POST')
+  h2 Login
+  label(for='email') Email:
+  input#email(type='email' name='email' required='')
+  label(for='password') Password:
+  input#password(type='password' name='password' required='')
+  input(type='submit' value='Login')
+  p
+    | Don&apos;t have an account?
+    a(href='/register') Register
