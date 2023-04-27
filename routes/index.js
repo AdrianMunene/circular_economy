@@ -6,13 +6,17 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const multer = require('multer');
 const { body, validationResult } = require('express-validator');
 
 //database connection
 const sequelize = require('../config/db');
 const  User  = require('../models/users');
 const Product = require('../models/product');
-/* GET home page. */
+
+//middleware
+const upload = require('../middleware/fileupload.js')
+
 router.get('/', (req, res) =>{
     res.render('index', { title: 'Express' }); //render index, {title: Express}
 });
@@ -87,18 +91,29 @@ router.get('/me', async (req, res, next) => {
         res.status(200).json(user);
     }
 );
-router.get('/shop', (req, res) => {
-    res.render('shop')
-})
+
+router.get('/shop', async (req, res, next) => {
+    try {
+        const Products = await Product.findAll();
+        res.render('shop', { Products });
+    } catch (err) {
+        console.error(err)
+    }
+});
+
 router.get('/sell', (req, res) => {
     res.render('sell');
 });
 
-router.post('/sell', async (req, res, next) => {
-    const { name, category, description, price, quantity, image } = req.body;
-    if (!name || !category || !description || !price ||!quantity || !image) {
+router.post('/sell', upload.single('image'), async (req, res, next) => { 
+    const { name, category, description, price, quantity } = req.body;
+
+    const image = (req.file.path).replace('public', '');
+
+    if (!name || !category || !description || !price || !quantity || !image) {
         return res.status(400).send('All fields are required');
     };
+
     try {
         const product = await Product.create({ name, category, description, price, quantity, image });
         res.status(200).send('Product posted succesfully');
@@ -110,3 +125,18 @@ router.post('/sell', async (req, res, next) => {
 
 module.exports = router;
 
+/*    const { name, category, description, price, quantity, image } = req.body;
+
+    if (!name || !category || !description || !price || !quantity || !image) {
+        return res.status(400).send('All fields are required');
+    };
+
+    try {
+        const host = req.hostname;
+        const image = req.protocol + "://" + host + '/' + req.file.path;
+        const product = await Product.create({ name, category, description, price, quantity, image });
+        res.status(200).send('Product posted succesfully');
+    } catch (err) {
+        console.log(err)
+        res.status(200).send('Error posting product');
+    };*/

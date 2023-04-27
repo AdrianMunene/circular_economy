@@ -4,7 +4,7 @@ head
   link(rel='stylesheet' href='./stylesheets/sell.css')
 .form-container
   h2 Sell Your Waste Products
-  form(action='/sell' method='POST')
+  form(action='/sell' method='POST' enctype='multipart/form-data')
     label(for='product-name') Product Name:
     input#product-name(type='text' name='name' required='')
     label(for='category') Category:
@@ -19,11 +19,11 @@ head
     br
     br
     label(for='product-description') Product Description:
-    textarea#product-description(name='description' required='')
+    textarea#product-description(type='text' name='description' required='')
     label(for='price') Price:
     input#price(type='number' name='price' required='')
     label(for='quantity-available') Quantity Available:
     input#quantity-available(type='number' name='quantity' required='')
     label(for='product-image') Product Image:
-    input#product-image(type='file' name='image')
+    input#product-image(type='file' name='image' accept='image/*')
     input(type='submit' value='Submit')
