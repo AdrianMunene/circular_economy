@@ -28,7 +28,7 @@ const addProduct = async (req, res) => {
         //status(200).json({ succes: true, message: 'Product posted succesfully' });
     } catch (error) {
         //console.log(err)
-        res.render('sell', { error: error });
+        return res.render('sell', { error: error });
         //status(200).json({ success: false, message: 'Error posting product' });
     };
 };
@@ -39,7 +39,7 @@ const addProductCheck = async (req, res, next) => {
         return res.render('sell', { loginPrompt: true });
     }
     res.render('sell', { loggedIn: true });
-}
+};
 
 const productById = async (req, res) => {
     try {
