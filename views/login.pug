@@ -12,3 +12,12 @@ form#login-form(action='/login' method='POST')
   p
     | Don&apos;t have an account?
     a(href='/register') Register
+
+if error
+    .error
+        p=error
+
+if message
+    .message
+        p=message
+        a(href='/register') Create an account 

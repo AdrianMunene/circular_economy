@@ -1,10 +1,10 @@
 doctype html
 head
   title Sell Your Waste Products
-  link(rel='stylesheet' href='./stylesheets/sell.css')
+  link(rel='stylesheet' href='/stylesheets/sell.css')
 .form-container
   h2 Sell Your Waste Products
-  form(action='/sell' method='POST' enctype='multipart/form-data')
+  form(action='/products/addProduct' method='POST' enctype='multipart/form-data')
     label(for='product-name') Product Name:
     input#product-name(type='text' name='name' required='')
     label(for='category') Category:

@@ -13,6 +13,13 @@ var dotenv = require('dotenv').config();
 
 //database connection
 var sequelize = require('./config/db');
+//models
+const User = require('./models/users');
+const Product = require('./models/product');
+const Cart = require('./models/cart');
+const Cart_Item = require('./models/cart-item');
+const Order = require('./models/order');
+const Order_Item = require('./models/order-item');
 
 //get PORT from .env variables
 var PORT = process.env.PORT || 3000;
@@ -21,6 +28,8 @@ var PORT = process.env.PORT || 3000;
 var indexRouter = require('./routes/index');
 //usersRouter to handle...
 var usersRouter = require('./routes/users');
+//productRouter to handle...
+var productsRouter = require('./routes/products');
 
 
 var app = express();
@@ -40,6 +49,7 @@ app.use(express.static(path.join(__dirname, 'public',)));
 //** 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/products', productsRouter);
 
 
 //line 36 - Not my code
@@ -59,7 +69,37 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+//relationships
+Product.belongsTo(User, {
+    constraints: true,
+    onDelete: 'CASCADE'
+});
+//user 1->Many products
+User.hasMany(Product);
 
+//user 1->One cart
+User.hasOne(Cart);
+Cart.belongsTo(User);
+
+//cart 1->Many products
+Cart.belongsToMany(Product, {
+    through: Cart_Item
+});
+Product.belongsToMany(Cart, {
+    through: Cart_Item
+});
+//order Many->1 users
+//order Many->many products
+Order.belongsTo(User);
+User.hasMany(Order);
+Order.belongsToMany(Product, {
+    through: Order_Item
+});
+Product.belongsToMany(Order, {
+    through: Order_Item
+});
+
+//sync models
 sequelize.sync().then(() => {
     console.log('Database schema synchronized succesfully');
 }).catch((error) => {

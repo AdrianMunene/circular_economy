@@ -53,9 +53,24 @@ p a {
         text-decoration: underline;
     }
 
-.error {
-    color: red;
-    font-size: 0.8em;
-    margin-top: -10px;
-    margin-bottom: 10px;
+.error, .message {
+    display:flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 5px;
+    margin: 25px;
 }
+    .error p, .message p {
+        padding: 10px;
+    }
+
+    .message a {
+        color: #4CAF50;
+        text-decoration: none;
+        margin-right: 30px;
+    }
+
+        .message a:hover {
+            text-decoration: underline;
+        }

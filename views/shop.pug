@@ -4,42 +4,39 @@ html
     meta(charset='utf-8')
     title Products
     link(rel='stylesheet' href='/stylesheets/shop.css')
-    //link(rel='stylesheet' href='/stylesheets/global.css')
   body
     header
       .container
-        h1 Logo
+        .logo
+          h1 Your Logo
         nav
           ul
             li
-              a(href='#') Home
+              a(href='/') Home
             li
-              a(href='#') Products
+              a(href='/products') Products
             li
               a(href='#') Contact
             li
               a(href='#') About
-        button.nav-toggle
-          span
-          span
-          span
-    //section.hero
-      .container
-        h1 Products
-    main
-      .container
         .search
-          form(action='/products' method='get')
+          form(action='#' method='get')
             input(type='text' name='search' placeholder='Search...')
             button(type='submit') Search
-        .product-list
-          each product in Products
-            .product-card
-              img.image(src=product.image, alt = 'productImage')
-              h2= product.name
-              p.description= product.description
-              p.price Ksh. #{product.price}
-              button.add-to-cart Add to Cart
+        .navigation
+          button.sell SELL!  
+          a(href='#') Cart
+          input#logout(type='button' value='')
+    main
+      .product-list
+        each product in products
+          .product-card
+            img.image(src=product.image, alt='productImage')
+            h2= product.name
+            p.description= product.description
+            p.price Ksh. #{product.price}
+            button.add-to-cart Add to Cart
+    script(src='/javascripts/authcheck.js')
     footer
       .container
         p Copyright © 2023

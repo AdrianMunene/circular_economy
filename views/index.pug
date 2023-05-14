@@ -1,33 +1,39 @@
 extends layout
 
 block content
+  body
     header
-      h1 Welcome to My Circular Economy Website
-    nav
-      ul
-        li
-          a(href='/') Home
-        li
-          a(href='/shop') Shop
-        li
-          a(href='/sell') Sell
-        li
-          a(href='/about') Information
-        li
-          a(href='#') Contact
-    main
-      h2 Shop for Sustainable Products
-      p Find high-quality reusable waste products in our online shop.
-      button Shop Now 
-      h2 Sell Your Own Reusable Waste Products
-      p List your own products for sale and help promote a circular economy.
-      button Sell Now
-      h2 Learn About Circular Economy Practices
-      p Get tips and resources on composting, upcycling, and reducing waste.
-      button Read More
-    footer
-      p &copy; 2023 My Circular Economy Website
+      .container
+        .logo
+          h1 Circular Economy
+        nav
+          ul
+            li
+              a(href='/') Home
+            li
+              a(href='/products') Products
+            li
+              a(href='#') Contact
+            li
+              a(href='#') About
+        .navigation
+          input#logout(type='button' value='')
 
+    .text-image-split
+      .text
+        h2 Circular Economy
+        p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt eleifend est, eu aliquam nisi consectetur vel. 
+        a(href='#') LEARN MORE
+        br
+        br
+        button.shop-now SHOP NOW
+      img(src='/images/earth-recycle.jpg', alt='Circular Economy')
 
+    .text-on-image
+      img(src='/images/earth-recycle.jpg', alt='Text on Image')
+      .overlay
+        h2 Circular Economy
+        p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt eleifend est, eu aliquam nisi consectetur vel.
+    script(src='/javascripts/authcheck.js')
 
 

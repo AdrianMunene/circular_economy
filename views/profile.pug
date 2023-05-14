@@ -1,0 +1,44 @@
+// profile.pug
+doctype html
+html
+  head
+    title Profile Page
+    link(rel='stylesheet' href='/stylesheets/profile.css')
+  body
+    header
+      .container
+        .logo
+          h1 Your Logo
+        nav
+          ul
+            li
+              a(href='/') Home
+            li
+              a(href='/products') Products
+            li
+              a(href='#') Contact
+            li
+              a(href='#') About
+        .navigation
+          a(href='#') Cart
+          input#logout(type='button' value='')
+    main
+        if loginPrompt
+            .loginPrompt
+                p Please log in to view your profile.
+                br
+                a(href='/login') Log in
+        else if accountCreationMessage
+            .accountCreationMessage
+                p Your account does not exist. Please create an account.
+                br
+                a(href='/register') Create Account
+        else
+            .profile
+                .profile-card
+                    h1 Welcome, #{user.username}!
+                    p Email: #{user.email}
+    script(src='/javascripts/authcheck.js')
+    footer
+        p Copyright © 2023
+
