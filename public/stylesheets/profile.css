@@ -80,6 +80,7 @@ main {
     align-items: flex-start;
     min-height: calc(100vh - 120px);
 }
+
 .loginPrompt {
     display: flex;
     flex-direction:column;

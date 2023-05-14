@@ -1,3 +1,10 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f1f1f1;
+    margin: 0;
+    padding: 0;
+}
+
 header {
     background-color: #fff;
     color: #fff;
@@ -43,10 +50,10 @@ nav a {
     display: flex;
     align-items:center;
 }
-    .navigation a{
-        color: #000;
+    .navigation a {
+        color: #4CAF50;
         text-decoration: none;
-        margin-left:10px;
+        margin: auto 25px auto 0;
     }
         .navigation a:hover{
             text-decoration: underline;
@@ -68,10 +75,12 @@ nav a {
 
 .text-image-split {
     display: flex;
+    background-color: #fff;
     align-items: center;
     text-align: center;
     height: 50vh;
     padding: 2rem;
+    margin: 2rem;
 }
 
     .text-image-split .text {

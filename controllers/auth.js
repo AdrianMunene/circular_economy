@@ -38,7 +38,7 @@ const login = async (req, res) => {
                 'username': user.username
             }, process.env.SECRET);
             res.status(200).cookie('token', token);
-            res.redirect('/profile');
+            res.redirect('/products');
         } else {
             res.render('login', { error: 'Incorrect Password' });
         }
@@ -49,7 +49,7 @@ const login = async (req, res) => {
 
 const logout = async (req, res, next) => {
     res.status(200).clearCookie('token');
-    res.redirect('/');
+    res.redirect('/products');
 };
 
 const me = async (req, res, next) => {

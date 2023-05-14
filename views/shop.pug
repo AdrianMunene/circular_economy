@@ -24,7 +24,8 @@ html
             input(type='text' name='search' placeholder='Search...')
             button(type='submit') Search
         .navigation
-          button.sell SELL!  
+          button#sell SELL!
+          a(href='/profile') Profile
           a(href='#') Cart
           input#logout(type='button' value='')
     main
@@ -37,6 +38,7 @@ html
             p.price Ksh. #{product.price}
             button.add-to-cart Add to Cart
     script(src='/javascripts/authcheck.js')
+    script(src='/javascripts/sell.js')
     footer
       .container
         p Copyright © 2023

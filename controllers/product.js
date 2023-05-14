@@ -18,17 +18,28 @@ const addProduct = async (req, res) => {
     const image = (req.file.path).replace('public', '');
 
     if (!name || !category || !description || !price || !quantity || !image) {
-        return res.status(400).json({ success: false, message: 'All fields are required' });
+        return res.render('sell', { error: 'All fields are required' });
+        //res.status(400).json({success: false, message:'All fields are required'});
     };
 
     try {
         const product = await Product.create({ name, category, description, price, quantity, image });
-        res.status(200).json({ succes: true, message: 'Product posted succesfully' });
-    } catch (err) {
-        console.log(err)
-        res.status(200).json({ success: false, message: 'Error posting product' });
+        return res.render('sell', { message: 'Product posted succesfully' });
+        //status(200).json({ succes: true, message: 'Product posted succesfully' });
+    } catch (error) {
+        //console.log(err)
+        res.render('sell', { error: error });
+        //status(200).json({ success: false, message: 'Error posting product' });
     };
 };
+
+const addProductCheck = async (req, res, next) => {
+    const user = req.user;
+    if (!user) {
+        return res.render('sell', { loginPrompt: true });
+    }
+    res.render('sell', { loggedIn: true });
+}
 
 const productById = async (req, res) => {
     try {
@@ -53,6 +64,7 @@ module.exports =
 {
     allProducts,
     addProduct,
+    addProductCheck,
     productById,
     productsByCategory
 };
