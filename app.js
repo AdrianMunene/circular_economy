@@ -30,6 +30,8 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 //productRouter to handle...
 var productsRouter = require('./routes/products');
+//cartRouter
+var cartRouter = require('./routes/cart');
 
 
 var app = express();
@@ -50,6 +52,7 @@ app.use(express.static(path.join(__dirname, 'public',)));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/products', productsRouter);
+app.use('/cart', cartRouter);
 
 
 //line 36 - Not my code
@@ -81,7 +84,7 @@ User.hasMany(Product);
 User.hasOne(Cart);
 Cart.belongsTo(User);
 
-//cart 1->Many products
+//cart many->Many products
 Cart.belongsToMany(Product, {
     through: Cart_Item
 });

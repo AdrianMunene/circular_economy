@@ -10,7 +10,6 @@
     <Folder Include="config\" />
     <Folder Include="controllers\" />
     <Folder Include="middleware\" />
-    <Folder Include="public\javascripts\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="views\register.pug" />

@@ -1,0 +1,67 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  link(rel='stylesheet' href='/stylesheets/cart.css')
+  title Cart
+body
+    header
+      .container
+        .logo
+          h1 Your Logo
+        nav
+          ul
+            li
+              a(href='/') Home
+            li
+              a(href='/products') Products
+            li
+              a(href='#') Contact
+            li
+              a(href='#') About
+        .navigation
+          a(href='/profile') Profile
+          input#logout(type='button' value='')        
+    main
+        if loginPrompt
+            .loginPropmt
+                p Please log in to view yout cart 
+                a(href='/login') Log In
+        else if error
+              p.error= error
+        else
+            table
+                thead
+                    tr
+                        th Name
+                        th Description
+                        th Price per kg
+                        th Quantity
+                        th Price
+                        th Action
+                tbody
+                    each product, index in products
+                        tr
+                            td= product.name
+                            td= product.description
+                            td= product.price
+                            td= cartitem[index].quantity
+                            td= cartitem[index].quantity * product.price
+                            td
+                                form(action='/cart/removefromCart' method='POST')
+                                    input(type='hidden' name='productId' value=product.id)
+                                    input.remove-button(type='submit' value='X')
+                tfoot
+                    tr
+                        td(colspan='5') 
+                        td
+                            form(action='/cart/checkout' method='POST')
+                                input.checkout-button(type='submit' value='Checkout')
+            if message
+                .message
+                    p=message
+    script(src='/javascripts/authcheck.js')
+    footer  
+        p Copyright c 2023
+    

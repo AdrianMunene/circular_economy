@@ -3,7 +3,7 @@ html
   head
     meta(charset='utf-8')
     title Products
-    link(rel='stylesheet' href='/stylesheets/shop.css')
+    link(rel='stylesheet' href='/stylesheets/shop.css')    
   body
     header
       .container
@@ -20,9 +20,10 @@ html
             li
               a(href='#') About
         .search
-          form(action='#' method='get')
-            input(type='text' name='search' placeholder='Search...')
-            button(type='submit') Search
+            //input#search(type='text' name='search' placeholder='Search...')
+            form(action='/products' method='get')
+                input(type='text' name='search' placeholder='Search...')
+                button(type='submit') Search
         .navigation
           button#sell SELL!
           a(href='/profile') Profile
@@ -31,15 +32,26 @@ html
     main
       .product-list
         each product in products
-          .product-card
-            img.image(src=product.image, alt='productImage')
-            h2= product.name
-            p.description= product.description
-            p.price Ksh. #{product.price}
-            button.add-to-cart Add to Cart
+            a(href='/products/' + product.id)
+                .product-card
+                    img.image(src=product.image, alt='productImage')
+                    h2= product.name                    
+                    input(type='hidden' name='productCategory' value=product.category)
+                    input(type='hidden' name='ProductId' value=product.id)
+                    p.price Ksh. #{product.price}                    
     script(src='/javascripts/authcheck.js')
-    script(src='/javascripts/sell.js')
+    script(src='/javascripts/sell.js')    
+    script(src='https://code.jquery.com/jquery-3.6.0.min.js')
     footer
       .container
         p Copyright © 2023
-
+  //script.
+    $(document).ready(function() {
+      $("#search").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $(".product-card").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+        $(".product-list").prepend($(".product-card:hidden"));
+      });
+    });

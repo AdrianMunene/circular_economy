@@ -1,0 +1,54 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    title Products
+    link(rel='stylesheet' href='/stylesheets/product-detail.css')
+  body
+    header
+      .container
+        .logo
+          h1 Your Logo
+        nav
+          ul
+            li
+              a(href='/') Home
+            li
+              a(href='/products') Products
+            li
+              a(href='#') Contact
+            li
+              a(href='#') About
+        .search
+          form(action='#' method='get')
+            input(type='text' name='search' placeholder='Search...')
+            button(type='submit') Search
+        .navigation
+          button#sell SELL!
+          a(href='/profile') Profile
+          a(href='/cart') Cart
+          input#logout(type='button' value='')
+
+    main
+        if product
+            .image-price
+                img.image(src=product.image)                    
+                h2=product.name
+                if message
+                    .message
+                        p=message
+                if error
+                    .error
+                        p=error
+            .description-quantity
+                p(style='font-weight:bold; color:#000;') Description
+                p.description=product.description
+                p.quantity Quantity: #{product.quantity}kg
+                form(action='/cart/addtoCart' method='POST')
+                    label(for='quantity-available') Quantity Request:
+                    input#quantity-available(type='number' name='quantity' required='')
+                    p.price Ksh. #{product.price} per kg
+                    input(type='hidden' name='ProductId' value=product.id)
+                    input(type='submit' value='Add to Cart')
+
+    script(src='/javascripts/authcheck.js')

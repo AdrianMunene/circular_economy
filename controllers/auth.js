@@ -1,4 +1,5 @@
 const User = require('../models/users');
+const Cart = require('../models/cart');
 
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -18,6 +19,8 @@ const register = async (req, res) => {
     const password = await bcrypt.hash(req.body.password, salt);
     try {
         const user = await User.create({ username, email, password });
+        const UserId = user.id;
+        const cart = await Cart.create({ UserId });
         res.redirect('/login')
         //res.status(201).send('User registered successfully');
     } catch (err) {
@@ -37,24 +40,22 @@ const login = async (req, res) => {
                 'email': user.email,
                 'username': user.username
             }, process.env.SECRET);
-            res.status(200).cookie('token', token);
-            res.redirect('/products');
+            res.status(200).cookie('token', token).redirect('/products');
         } else {
-            res.render('login', { error: 'Incorrect Password' });
+            return res.render('login', { error: 'Incorrect Password' });
         }
     } else {
-        res.render('login', { message: 'User does not exist' });
+        return res.render('login', { message: 'User does not exist' });
     }
 };
 
 const logout = async (req, res, next) => {
     res.status(200).clearCookie('token');
-    res.redirect('/products');
+    res.redirect('/profile');
 };
 
 const me = async (req, res, next) => {
-    try {
-        /*let token = req.headers['authorization'].split(" ")[1];*/
+    try {     
         let token = req.cookies.token;
         if (!token) {
             req.user = null;
@@ -66,19 +67,14 @@ const me = async (req, res, next) => {
     } catch (error) {
         res.status(400).json({ error: "Couldn't authenticate" });
     };
-/*    async (req, res, next) => {
-        let user = await User.findOne({ where: { id: req.user.id }, attributes: { exclude: ["password"] } });
-        if (user === null) {
-            res.status(400).json({ error: 'User not found' });
-        }
-    };*/
 };
 
 const profile = (req, res) => {
     const user = req.user;
     if (!user) {
         return res.render('profile', { loginPrompt: true });
-    }
+    };
+
     User.findOne({ where: { id: user.id }, attributes: { exclude: ["password"] } })
         .then((user) => {
             if (!user) {

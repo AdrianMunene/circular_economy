@@ -3,41 +3,53 @@ doctype html
 head
   title Sell Your Waste Products
   link(rel='stylesheet' href='/stylesheets/sell.css')
-if loginPrompt
-    .loginPrompt
-        p Please log in to be able to sell your product.
-        a(href='/login') Log in    
+body
+    header
+      .container
+        .logo
+          h1 Your Logo
+        nav
+          ul
+            li
+              a(href='/') Home
+            li
+              a(href='/products') Products
+            li
+              a(href='#') Contact
+            li
+              a(href='#') About
 
-.form-container
-    h2 Sell Your Waste Products
-    form(action='/products/addProduct' method='POST' enctype='multipart/form-data')
-        label(for='product-name') Product Name:
-        input#product-name(type='text' name='name' required='')
-        label(for='category') Category:
-        select#category(name='category')
-            option(value='plastic') Plastic
-            option(value='organic') Organic
-            option(value='glass') Glass
-            option(value='e-waste') E-waste
-            option(value='clothe-waste') Clothe waste
-            option(value='paper-waste') Paper waste
-            option(value='metal-waste') Metal waste
-        br
-        br
-        label(for='product-description') Product Description:
-        textarea#product-description(type='text' name='description' required='')
-        label(for='price') Price:
-        input#price(type='number' name='price' required='')
-        label(for='quantity-available') Quantity Available:
-        input#quantity-available(type='number' name='quantity' required='')
-        label(for='product-image') Product Image:
-        input#product-image(type='file' name='image' accept='image/*')
-        input(type='submit' value='Submit')
 
-    if message
-        .message
-            p=message
-    else if error
-        .error
-            p=error
+    .form-container
+        h2 Sell Your Waste Products
+        form(action='/products/addProduct' method='POST' enctype='multipart/form-data')
+            label(for='product-name') Product Name:
+            input#product-name(type='text' name='name' required='')
+            label(for='category') Category:
+            select#category(name='category')
+                option(value='plastic') Plastic
+                option(value='organic') Organic
+                option(value='glass') Glass
+                option(value='e-waste') E-waste
+                option(value='clothe-waste') Clothe waste
+                option(value='paper-waste') Paper waste
+                option(value='metal-waste') Metal waste
+            br
+            br
+            label(for='product-description') Product Description:
+            textarea#product-description(type='text' name='description' required='')
+            label(for='price') Price:
+            input#price(type='number' name='price' required='')
+            label(for='quantity-available') Quantity Available:
+            input#quantity-available(type='number' name='quantity' required='')
+            label(for='product-image') Product Image:
+            input#product-image(type='file' name='image' accept='image/*')
+            input(type='submit' value='Submit')
+
+        if message
+            .message
+                p=message
+        else if error
+            .error
+                p=error
             

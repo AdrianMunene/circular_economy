@@ -4,8 +4,51 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f1f1f1;
+    background-color: #f4f4f4;
 }
+
+header {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #fff;
+}
+
+.logo h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 600px 0 0;
+}
+
+nav li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+nav a {
+    color: #000;
+    text-decoration: none;
+}
+
+    nav a:hover {
+        text-decoration: underline;
+    }
 
 .form-container {
     background-color: #ffffff;
@@ -15,7 +58,7 @@ body {
     margin: auto;
     width: 50%;
     max-width: 500px;
-    margin-top: 50px;
+    margin-top: 20px;
 }
 
 h2 {
@@ -37,7 +80,8 @@ label {
     font-weight: bold;
 }
 
-input[type="submit"] {
+input[type="submit"]
+{
     background-color: #4CAF50;
     color: white;
     padding: 12px 20px;

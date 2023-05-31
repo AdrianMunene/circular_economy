@@ -2,22 +2,38 @@ doctype html
 head
   link(rel='stylesheet' href='/stylesheets/register.css')
   title Login Form
-form#login-form(action='/login' method='POST')
-  h2 Login
-  label(for='email') Email:
-  input#email(type='email' name='email' required='')
-  label(for='password') Password:
-  input#password(type='password' name='password' required='')
-  input(type='submit' value='Login')
-  p
-    | Don&apos;t have an account?
-    a(href='/register') Register
+body 
+    header
+      .container
+        .logo
+          h1 Your Logo
+        nav
+          ul
+            li
+              a(href='/') Home
+            li
+              a(href='/products') Products
+            li
+              a(href='#') Contact
+            li
+              a(href='#') About
+    main
+        form#login-form(action='/login' method='POST')
+          h2 Login
+          label(for='email') Email:
+          input#email(type='email' name='email' required='')
+          label(for='password') Password:
+          input#password(type='password' name='password' required='')
+          input(type='submit' value='Login')
+          p
+            | Don&apos;t have an account?
+            a(href='/register') Register
 
-if error
-    .error
-        p=error
+        if error
+            .error
+                p=error
 
-if message
-    .message
-        p=message
-        a(href='/register') Create an account 
+        if message
+            .message
+                p=message
+                a(href='/register') Create an account 

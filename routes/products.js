@@ -11,7 +11,7 @@ const { addProduct, addProductCheck, allProducts, productById, productsByCategor
 
 router.route('/').get(allProducts);
 
-router.route('/addProduct').get(me, addProductCheck).post(upload.single('image'), addProduct);
+router.route('/addProduct').get(me, addProductCheck).post(me, upload.single('image'), addProduct);
 
 router.route('/:id').get(productById);
 
