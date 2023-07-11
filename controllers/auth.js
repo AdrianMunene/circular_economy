@@ -1,6 +1,7 @@
 const User = require('../models/users');
 const Cart = require('../models/cart');
 
+
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
@@ -74,7 +75,7 @@ const profile = (req, res) => {
     if (!user) {
         return res.render('profile', { loginPrompt: true });
     };
-
+    
     User.findOne({ where: { id: user.id }, attributes: { exclude: ["password"] } })
         .then((user) => {
             if (!user) {

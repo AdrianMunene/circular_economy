@@ -14,3 +14,8 @@ if (!token) {
     });
 };
 
+let shopnow = document.getElementById('shop-now')
+
+shopnow.addEventListener('click', () => {
+    window.location.href='/products'
+})

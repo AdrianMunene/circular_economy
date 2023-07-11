@@ -1,4 +1,4 @@
-const Cart = require('../models/cart');
+ const Cart = require('../models/cart');
 const Cart_Item = require('../models/cart-item');
 const Product = require('../models/product');
 
@@ -45,9 +45,6 @@ const addtoCart = async (req, res, next) => {
 
     try {
         const cartitem = await Cart_Item.create({ quantity, CartId, ProductId });
-        //implement on orders instead
-        /*product.quantity = product.quantity - quantity;
-        await product.save();*/
 
         return res.render('product-detail', { product: product, message: `${quantity}kgs of the ${product.name} have been added to cart` });
         
